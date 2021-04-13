@@ -18,24 +18,25 @@ def index():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if logged_user := User.query.filter_by(username=username).first():
-            if password == logged_user._hashedpassword:
-                login_user(logged_user)
-                print(current_user)
-                return redirect(url_for('index'))
-
-    return render_template('login.html')
+	if request.method == 'POST':
+			username = request.form['username']
+			password = request.form['password']
+			if logged_user := User.query.filter_by(username=username).first():
+					if password == logged_user._hashedpassword:
+							login_user(logged_user)
+							print(current_user)
+							return redirect(url_for('index'))
+	return render_template('login.html')
 
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
-    if request.method == "POST":
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form["email"]
-        db.session.add(User(username=username, _hashedpassword=password, email=email))
-        db.session.commit()
-    return render_template('register.html')
+	if request.method == "POST":
+		username = request.form['username']
+		password = request.form['password']
+		email = request.form["email"]
+		if not  User.query.filter_by(username=username).first():
+			db.session.add(User(username=username, _hashedpassword=password, email=email))
+			db.session.commit()
+			return redirect(url_for('login'))
+	return render_template('register.html')
