@@ -1,0 +1,13 @@
+.colour{
+color:  #117a8b;
+
+}
+
+.container-center
+{
+	position: absolute;
+	top: 25%;
+	right: 50%;
+	width: 50%;
+	transform: translateX(50%);
+}

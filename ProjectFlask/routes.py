@@ -77,6 +77,7 @@ def unauthorized():
     return render_template("404.html")
 
 @app.errorhandler(404)
-def error_handler():
+def error_handler(error):
+	print(error)
 	return render_template("404.html")
 
