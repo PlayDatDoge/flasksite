@@ -6,6 +6,7 @@ from flask import current_app as app
 
 @app.route('/index')
 @app.route('/')
+@login_required
 def index():
 	if not flask_login.current_user.is_authenticated:
 		if 'user' in session:
@@ -17,6 +18,7 @@ def index():
 		return render_template('index.html')
 
 @app.route('/logout')
+@login_required
 def logout():
 	if flask_login.current_user.is_authenticated:
 		if 'user' in session:
@@ -24,10 +26,6 @@ def logout():
 		logout_user()
 	redirect(url_for('login'))	
 								
-			 
-
-
-
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -57,10 +55,28 @@ def register():
 			return redirect(url_for('login'))
 	return render_template('register.html')
 
+@login_required
+@app.route('/myteam',methods=['POST', 'GET'])
+def myteam():
+	return render_template('myteam.html')
 
+@login_required
+@app.route('/player',methods=['POST', 'GET'])
+def player():
+	return render_template('player.html')
 	
 
 # @app.route('/myteam', methods=['POST', 'GET'])
 # def myteam():
 #     if request.method == 'POST':
 #         return render_template('myteam.html')
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return render_template("404.html")
+
+@app.errorhandler(404)
+def error_handler():
+	return render_template("404.html")
+
