@@ -20,11 +20,10 @@ def index():
 @app.route('/logout')
 @login_required
 def logout():
-	if flask_login.current_user.is_authenticated:
-		if 'user' in session:
-			session['user']=''
-		logout_user()
-	redirect(url_for('login'))	
+	if 'user' in session:
+		session['user'] = ''
+	logout_user()
+	return redirect(url_for('login'))	
 								
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -65,16 +64,13 @@ def myteam():
 def player():
 	return render_template('player.html')
 	
-
-# @app.route('/myteam', methods=['POST', 'GET'])
-# def myteam():
-#     if request.method == 'POST':
-#         return render_template('myteam.html')
-
+# fix the error handler
 
 @login_manager.unauthorized_handler
 def unauthorized():
-    return render_template("404.html")
+	# if not 'user' in session:
+	return redirect(url_for('login'))
+
 
 @app.errorhandler(404)
 def error_handler(error):
