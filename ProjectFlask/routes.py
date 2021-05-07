@@ -3,17 +3,18 @@ from .models import db, User,login_manager
 import flask_login
 from flask_login import login_user, login_required, logout_user , current_user
 from flask import current_app as app
+from .userfunctions import player_df
+
 
 @app.route('/index')
 @app.route('/')
-@login_required
 def index():
 	if not flask_login.current_user.is_authenticated:
 		if 'user' in session:
 			if logged_user := User.query.filter_by(username=session['user']).first():
 				login_user(logged_user)
 		else:
-			return redirect(url_for('login'))
+			return render_template('index.html')
 	if flask_login.current_user.is_authenticated:
 		return render_template('index.html')
 
@@ -54,21 +55,30 @@ def register():
 			return redirect(url_for('login'))
 	return render_template('register.html')
 
-@login_required
+
 @app.route('/myteam',methods=['POST', 'GET'])
+@login_required
 def myteam():
 	return render_template('myteam.html')
 
-@login_required
+
 @app.route('/player',methods=['POST', 'GET'])
+@login_required
 def player():
 	return render_template('player.html')
 	
-# fix the error handler
+# https://FlaskSite.playthatamziiss.repl.co/player/1
+
+@app.route('/player/<int:player_id>')
+def playerbyID(player_id):
+	print(player_df.loc[player_id])
+	return render_template('index.html')
+		
+
+
 
 @login_manager.unauthorized_handler
 def unauthorized():
-	# if not 'user' in session:
 	return redirect(url_for('login'))
 
 
@@ -76,4 +86,3 @@ def unauthorized():
 def error_handler(error):
 	print(error)
 	return render_template("404.html")
-
