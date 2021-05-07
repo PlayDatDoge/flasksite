@@ -1,5 +1,14 @@
 {% extends "base.html" %}
-{% block title %}Players!{% endblock %}
+{% block title %}Player{% endblock %}
 {% block content %}
 
+{% for key in player_info %}
+            <li class="list-group-item d-flex justify-content-between colour"  style="background-color:#fafafa">
+                <strong>{{key}}</strong>
+                <p>{{player_info[key]}}</p>
+            </li>
+
+        {% endfor %}
 {% endblock %}
+
+

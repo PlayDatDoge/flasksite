@@ -71,9 +71,7 @@ def player():
 
 @app.route('/player/<int:player_id>')
 def playerbyID(player_id):
-	print(player_df.loc[player_id])
-	return render_template('index.html')
-		
+	return render_template('player.html',player_info=dict(player_df.loc[player_id]))
 
 
 

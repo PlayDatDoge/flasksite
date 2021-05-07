@@ -29,7 +29,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 player_df = pd.read_csv("datasets/players.csv", header=0)
 url_df = pd.read_csv("datasets/tbl_player_urls.csv", header=0)['str_url']
-# linearreg = "ProjectFlask/datasets/linearreg.sav"
+linearreg = "ProjectFlask/datasets/linearreg.sav"
 
 
 # corr = player_df.corr()
