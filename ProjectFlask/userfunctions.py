@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import pandas as pd
 import datetime
 from sklearn import linear_model
 from numpy.distutils.system_info import dfftw_info
@@ -15,7 +14,7 @@ from sklearn.tree import plot_tree
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os 
-
+from flask_sqlalchemy import SQLAlchemy
 # player_skill_df = pd.read_csv("D:\datalist\\tbl_player_skill.csv", header=0)
 # player_movement_df = pd.read_csv("D:\datalist\\tbl_player_movement.csv", header=0)
 # player_mentality_df = pd.read_csv("D:\datalist\\tbl_player_mentality.csv", header=0)
@@ -28,8 +27,8 @@ import os
 # print(os.listdir(os.getcwd()))
 # print(os.listdir(os.getcwd() + "/ProjectFlask/datasets"))
 
-player_df = pd.read_csv("ProjectFlask/datasets/players.csv", header=0)
-url_df = pd.read_csv("ProjectFlask/datasets/tbl_player_urls.csv", header=0)['str_url']
+player_df = pd.read_csv("datasets/players.csv", header=0)
+url_df = pd.read_csv("datasets/tbl_player_urls.csv", header=0)['str_url']
 # linearreg = "ProjectFlask/datasets/linearreg.sav"
 
 

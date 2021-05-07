@@ -4,7 +4,7 @@ import flask_login
 from flask_login import login_user, login_required, logout_user , current_user
 from flask import current_app as app
 from .userfunctions import player_df
-
+from flask_sqlalchemy import SQLAlchemy
 
 @app.route('/index')
 @app.route('/')
