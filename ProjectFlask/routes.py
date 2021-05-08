@@ -33,7 +33,7 @@ def login():
 		username12 = request.form['username']
 		password = request.form['password']
 		if logged_user := User.query.filter_by(username=username12).first():
-			if password == logged_user._hashedpassword:
+			if logged_user.validate_password(password):
 				session['user'] = logged_user.username
 				login_user(logged_user)
 				print(current_user)
