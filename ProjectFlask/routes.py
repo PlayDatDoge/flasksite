@@ -50,7 +50,7 @@ def register():
 		password = request.form['password']
 		email = request.form["email"]
 		if not  User.query.filter_by(username=username).first():
-			db.session.add(User(username=username, _hashedpassword=password, email=email))
+			db.session.add(User(username=username, password=password, email=email))
 			db.session.commit()
 			return redirect(url_for('login'))
 	return render_template('register.html')
