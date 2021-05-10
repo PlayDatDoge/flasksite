@@ -13,10 +13,11 @@ def index():
 		if 'user' in session:
 			if logged_user := User.query.filter_by(username=session['user']).first():
 				login_user(logged_user)
+				return render_template('index.html')
 		else:
-			return render_template('index.html')
-	if flask_login.current_user.is_authenticated:
-		return render_template('index.html')
+			return redirect(url_for('login'))
+	return render_template('index.html')
+
 
 @app.route('/logout')
 @login_required
@@ -29,18 +30,24 @@ def logout():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-	if request.method == 'POST':
-		username12 = request.form['username']
-		password = request.form['password']
-		if logged_user := User.query.filter_by(username=username12).first():
-			if logged_user.validate_password(password):
-				session['user'] = logged_user.username
+	if not flask_login.current_user.is_authenticated:
+		if 'user' in session:
+			if logged_user := User.query.filter_by(username=session['user']).first():
 				login_user(logged_user)
-				print(current_user)
 				return redirect(url_for('index'))
+		
+		if request.method == 'POST':
+			username12 = request.form['username']
+			password = request.form['password']
+			if logged_user := User.query.filter_by(username=username12).first():
+				if logged_user.validate_password(password):
+					session['user'] = logged_user.username
+					login_user(logged_user)
+					print(current_user)
+					return redirect(url_for('index'))
 
-	return render_template('login.html')
-
+		return render_template('login.html')
+	return redirect(url_for('index'))
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -67,7 +74,6 @@ def myteam():
 def player():
 	return render_template('player.html')
 	
-# https://FlaskSite.playthatamziiss.repl.co/player/1
 
 @app.route('/player/<int:player_id>')
 def playerbyID(player_id):
