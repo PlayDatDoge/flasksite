@@ -1,8 +1,21 @@
 {% extends "base.html" %}
 {% block title %}User Preferences{% endblock %}
 {% block content %}
+<link rel="stylesheet" href="dark-mode.css">
+<script src="dark-mode-switch.min.js"></script>
 
 
 
 
+
+
+<button onclick="myFunction()">Toggle dark mode</button>
+
+
+   <script>
+    function myFunction() {
+       var element = document.body;
+       element.classList.toggle("dark-mode");
+    }
+    </script>
 {% endblock %}

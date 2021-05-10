@@ -23,13 +23,13 @@
   
 		<!-- Custom css -->
 		<link rel="stylesheet" type = "text/css" href="{{url_for('static',filename = 'Mainstyle.css')}}">
+        <link rel="stylesheet" type = "text/css" href="{{url_for('static',filename = session['theme']+'.css')}}">
 
     <title>{% block title %}{% endblock %}</title>
     
    
 </head>
-<body style="background-color:white">
-
+<body>
 <nav class="navbar navbar-expand-lg" style="background-color:rgba(100,100,100,0.05)">
     <div class="container-fluid">
         <a class="navbar-brand colour" href="/">Kabesa</a>
