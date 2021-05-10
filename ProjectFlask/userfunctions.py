@@ -23,38 +23,34 @@ from flask_sqlalchemy import SQLAlchemy
 # player_traits_df = pd.read_csv("D:\datalist\\tbl_player_traits.csv", header=0)
 # player_specialities_df = pd.read_csv("D:\datalist\\tbl_player_specialities.csv", header=0)
 
-# print(os.getcwd())
-# print(os.listdir(os.getcwd()))
-# print(os.listdir(os.getcwd() + "/ProjectFlask/datasets"))
 
 player_df = pd.read_csv("datasets/players.csv", header=0)
 url_df = pd.read_csv("datasets/tbl_player_urls.csv", header=0)['str_url']
 linearreg = "ProjectFlask/datasets/linearreg.sav"
 
+def corr_table():
+	corr = player_df.corr()
+	mask = np.zeros_like(corr)
+	mask[np.triu_indices_from(mask)] = True
+	with sns.axes_style("white"):
+		f, ax = plt.subplots(figsize=(15, 15))
+		ax = sns.heatmap(corr,mask=mask,square=True,linewidths=.8,cmap="coolwarm")
 
-# corr = player_df.corr()
-# mask = np.zeros_like(corr)
-# mask[np.triu_indices_from(mask)] = True
-# with sns.axes_style("white"):
-#     f, ax = plt.subplots(figsize=(15, 15))
-#     ax = sns.heatmap(corr,mask=mask,square=True,linewidths=.8,cmap="coolwarm")
 
 def fixname():
-    namelist = [val.split('/')[-3].replace('-',' ').title() for val in url_df]
-    player_df['str_player_name'] = pd.Series(namelist)
-    print(player_df['str_player_name'].head(26))
-# fixname()
+	namelist = [val.split('/')[-3].replace('-',' ').title() for val in url_df]
+	player_df['str_player_name'] = pd.Series(namelist)
+    
 
 
 
 def player_finder(name):
 	name = name.title()
-
 	if name in player_df['str_player_name'].values:
-		 print('Further information about the player: '+name+'down below')
-            
+		 print('Further information about the player: '+name+'down below')   
 	else:
 		 print('No such player, Try using capital letters / for example  "Ben Hough"')
+
 
 
 
