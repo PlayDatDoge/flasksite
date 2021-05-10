@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(130), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     _password_hash = db.Column(db.String(120), nullable=False)
+    theme = db.Column(db.String(15), nullable=False,default='theme')
 
     def __repr__(self):
         return '<User: {}>'.format(self.username)

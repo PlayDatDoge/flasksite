@@ -11,3 +11,12 @@ color:  #117a8b;
 	width: 50%;
 	transform: translateX(50%);
 }
+
+body{
+	background-color: var(--background_color);
+}
+.dark-mode {
+	background-color: #1a1a1a;
+	color: #f0f0f0;
+  }
+

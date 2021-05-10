@@ -42,6 +42,7 @@ def login():
 			if logged_user := User.query.filter_by(username=username12).first():
 				if logged_user.validate_password(password):
 					session['user'] = logged_user.username
+					session['theme'] = logged_user.theme
 					login_user(logged_user)
 					print(current_user)
 					return redirect(url_for('index'))
@@ -81,7 +82,19 @@ def playerbyID(player_id):
 
 
 @app.route('/userpref',methods=['POST', 'GET'])
+@login_required
 def userpref():
+	if request.method == 'POST':
+		if 'theme' in request.form:
+			current_theme = current_user.theme
+			if current_theme == 'theme':
+				current_theme = 'dark_theme'
+				
+			else:
+				current_theme = 'theme'
+			session['theme'] = current_theme
+		db.session.commit()
+		
 	return render_template('userpref.html')
 
 

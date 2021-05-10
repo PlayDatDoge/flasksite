@@ -20,11 +20,14 @@
           integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> -->
     <!--  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
     <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
-  
+        
 		<!-- Custom css -->
 		<link rel="stylesheet" type = "text/css" href="{{url_for('static',filename = 'Mainstyle.css')}}">
+        {% if session['theme'] %}
         <link rel="stylesheet" type = "text/css" href="{{url_for('static',filename = session['theme']+'.css')}}">
-
+        {% else %}
+        <link rel="stylesheet" type = "text/css" href="{{url_for('static',filename = 'theme.css')}}">
+        {% endif %}
     <title>{% block title %}{% endblock %}</title>
     
    

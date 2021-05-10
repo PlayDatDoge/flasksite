@@ -7,15 +7,17 @@
 
 
 
+ 
 
 
-<button onclick="myFunction()">Toggle dark mode</button>
+<!-- <button onclick="myFunction()">Toggle dark mode</button> -->
+<form method="POST" action="/userpref">
+ 
+
+<input type='checkbox' name='theme'>
+<label>Theme</label>
 
 
-   <script>
-    function myFunction() {
-       var element = document.body;
-       element.classList.toggle("dark-mode");
-    }
-    </script>
+<input type='submit' value='Submit'>
+</form>
 {% endblock %}
