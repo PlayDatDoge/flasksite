@@ -74,6 +74,10 @@ def playerbyID(player_id):
 	return render_template('player.html',player_info=dict(player_df.loc[player_id]))
 
 
+@app.route('/userpref',methods=['POST', 'GET'])
+def userpref():
+	return render_template('userpref.html')
+
 
 @login_manager.unauthorized_handler
 def unauthorized():
