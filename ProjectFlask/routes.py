@@ -10,9 +10,10 @@ from flask_sqlalchemy import SQLAlchemy
 @app.route('/')
 def index():
 	if not flask_login.current_user.is_authenticated:
-		if 'user' in session:
+		if 'user' in session:	
 			if logged_user := User.query.filter_by(username=session['user']).first():
 				login_user(logged_user)
+				session['theme'] = current_user.theme
 				return render_template('index.html')
 		else:
 			return redirect(url_for('login'))
@@ -22,8 +23,8 @@ def index():
 @app.route('/logout')
 @login_required
 def logout():
-	if 'user' in session:
-		session['user'] = ''
+	session.pop('user', None)
+	session.pop('theme', None)
 	logout_user()
 	return redirect(url_for('login'))	
 								
@@ -34,6 +35,7 @@ def login():
 		if 'user' in session:
 			if logged_user := User.query.filter_by(username=session['user']).first():
 				login_user(logged_user)
+				session['theme'] = current_user.theme
 				return redirect(url_for('index'))
 		
 		if request.method == 'POST':
@@ -85,14 +87,13 @@ def playerbyID(player_id):
 @login_required
 def userpref():
 	if request.method == 'POST':
-		if 'theme' in request.form:
-			current_theme = current_user.theme
-			if current_theme == 'theme':
-				current_theme = 'dark_theme'
-				
-			else:
-				current_theme = 'theme'
-			session['theme'] = current_theme
+		if 'cbox' in request.form:
+			print(current_user.theme)
+			if current_user.theme == 'theme':
+				current_user.theme = 'dark_theme'
+			elif current_user.theme == 'dark_theme':
+				current_user.theme = 'theme'
+			session['theme'] = current_user.theme
 		db.session.commit()
 		
 	return render_template('userpref.html')
