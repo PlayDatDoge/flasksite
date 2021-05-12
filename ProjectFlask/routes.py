@@ -3,7 +3,7 @@ from .models import db, User,login_manager
 import flask_login
 from flask_login import login_user, login_required, logout_user , current_user
 from flask import current_app as app
-from .userfunctions import player_df
+from .userfunctions import player_df,player19_df
 from flask_sqlalchemy import SQLAlchemy
 
 @app.route('/index')
@@ -14,6 +14,7 @@ def index():
 			if logged_user := User.query.filter_by(username=session['user']).first():
 				login_user(logged_user)
 				session['theme'] = current_user.theme
+				session['database'] = current_user.database
 				return render_template('index.html')
 		else:
 			return redirect(url_for('login'))
@@ -25,6 +26,7 @@ def index():
 def logout():
 	session.pop('user', None)
 	session.pop('theme', None)
+	session.pop('database', None)
 	logout_user()
 	return redirect(url_for('login'))	
 								
@@ -35,6 +37,7 @@ def login():
 		if 'user' in session:
 			if logged_user := User.query.filter_by(username=session['user']).first():
 				login_user(logged_user)
+				session['database'] = current_user.database
 				session['theme'] = current_user.theme
 				return redirect(url_for('index'))
 		
@@ -80,7 +83,14 @@ def player():
 
 @app.route('/player/<int:player_id>')
 def playerbyID(player_id):
-	return render_template('player.html',player_info=dict(player_df.loc[player_id]))
+	if 'database' in session:
+		if session['database'] == 'FIFA19':
+			userdf=player19_df
+		elif session['database'] == 'FIFA20':
+			userdf=player_df
+	else:
+		userdf=player19_df
+	return render_template('player.html',player_info=dict(userdf.loc[player_id]))
 
 
 @app.route('/userpref',methods=['POST', 'GET'])
@@ -94,8 +104,14 @@ def userpref():
 			elif current_user.theme == 'dark_theme':
 				current_user.theme = 'theme'
 			session['theme'] = current_user.theme
+		if 'dbox' in request.form:
+			print(current_user.database)
+			if current_user.database == 'FIFA19':
+				current_user.database = 'FIFA20'
+			elif current_user.database == 'FIFA20':
+				current_user.database = 'FIFA19'
+			session['database'] = current_user.database
 		db.session.commit()
-		
 	return render_template('userpref.html')
 
 
