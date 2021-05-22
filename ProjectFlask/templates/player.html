@@ -1,7 +1,32 @@
 {% extends "base.html" %}
-{% block title %}Player{% endblock %}
+{% block title %}Players{% endblock %}
 {% block content %}
 
+
+<title>Player Search</title>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6 m-auto">
+                    <h3 class="text-center mb-3 colour">
+                        Player Search
+                    </h3>
+                    <div class="form-group">
+                        <input type="text" id='search' class="form-control form-control-lg" placeholder="Enter a player's name or ID">
+                    </div>
+                    <div id="match-list"></div>
+                </div>
+            </div>
+        </div> 
+        {% if session['database'] == 'FIFA19' %} 
+        <script src="{{ url_for('static', filename='javascript/manes19.js') }}"></script>
+        {% else %}
+        <script src="{{ url_for('static', filename='javascript/manes.js') }}"></script>
+        {% endif %}
+{% if player_id %}
+<div class="w3-panel" style="left: 50%;">
+<img src="{{ url_for('static', filename='player_images/images/'+ player_id +'.png') }}">
+</div>
+{% endif %}
 {% for key in player_info %}
             <li class="list-group-item d-flex justify-content-between colour">
                 <strong>{{key}}</strong>
@@ -9,6 +34,7 @@
             </li>
 
         {% endfor %}
+
 {% endblock %}
 
 

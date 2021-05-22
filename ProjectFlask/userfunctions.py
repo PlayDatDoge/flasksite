@@ -1,3 +1,4 @@
+import collections
 import pandas as pd
 import numpy as np
 import datetime
@@ -15,6 +16,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os 
 from flask_sqlalchemy import SQLAlchemy
+import json
 # player_skill_df = pd.read_csv("D:\datalist\\tbl_player_skill.csv", header=0)
 # player_movement_df = pd.read_csv("D:\datalist\\tbl_player_movement.csv", header=0)
 # player_mentality_df = pd.read_csv("D:\datalist\\tbl_player_mentality.csv", header=0)
@@ -38,23 +40,24 @@ def corr_table():
 		ax = sns.heatmap(corr,mask=mask,square=True,linewidths=.8,cmap="coolwarm")
 
 
-def fixname():
-	namelist = [val.split('/')[-3].replace('-',' ').title() for val in url_df]
-	player_df['str_player_name'] = pd.Series(namelist)
+namelist = [val.split('/')[-3].replace('-',' ').title() for val in url_df]
+player_df['str_player_name'] = pd.Series(namelist)
     
 
 
 
-def player_finder(name):
-	name = name.title()
-	if name in player_df['str_player_name'].values:
-		 print('Further information about the player: '+name+'down below')   
-	else:
-		 print('No such player, Try using capital letters / for example  "Ben Hough"')
+# def player_finder(name):
+# 	name = name.title()
+# 	if name in player_df['str_player_name'].values:
+# 		 print('Further information about the player: '+name+'down below')   
+# 	else:
+# 		 print('No such player, Try using capital letters / for example  "Ben Hough"')
 
+player19_df.rename(columns={'Unnamed: 0': 'player_id19','ID' : 'int_player_id' ,'Name' : 'str_player_name'},inplace=True)
 
+json_df = player_df.to_json(orient='records')
+json_df19 = player19_df.to_json(orient='records')
 
-
-
-
+with open('json_df19.json','w') as f:
+    f.write(json_df19)
 

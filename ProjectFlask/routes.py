@@ -74,7 +74,7 @@ def register():
 def myteam():
 	return render_template('myteam.html')
 
-
+ 
 @app.route('/player',methods=['POST', 'GET'])
 @login_required
 def player():
@@ -86,11 +86,12 @@ def playerbyID(player_id):
 	if 'database' in session:
 		if session['database'] == 'FIFA19':
 			userdf=player19_df
+			print('kaka')
 		elif session['database'] == 'FIFA20':
 			userdf=player_df
 	else:
 		userdf=player19_df
-	return render_template('player.html',player_info=dict(userdf.loc[player_id]))
+	return render_template('player.html',player_info=dict(userdf.loc[player_id]),player_id=str(player_id+1))
 
 
 @app.route('/userpref',methods=['POST', 'GET'])
@@ -113,6 +114,7 @@ def userpref():
 			session['database'] = current_user.database
 		db.session.commit()
 	return render_template('userpref.html')
+
 
 
 @login_manager.unauthorized_handler
