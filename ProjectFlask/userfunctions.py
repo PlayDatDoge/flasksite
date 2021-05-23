@@ -24,12 +24,17 @@ import json
 # player_profile_df = pd.read_csv("D:\datalist\\tbl_player_profile.csv", header=0)
 # player_traits_df = pd.read_csv("D:\datalist\\tbl_player_traits.csv", header=0)
 # player_specialities_df = pd.read_csv("D:\datalist\\tbl_player_specialities.csv", header=0)
-
+import requests
+from bs4 import BeautifulSoup
+from PIL import Image
+from urllib.request  import urlopen,Request
 
 player_df = pd.read_csv("datasets/players.csv", header=0)
 url_df = pd.read_csv("datasets/tbl_player_urls.csv", header=0)['str_url']
 linearreg = "ProjectFlask/datasets/linearreg.sav"
 player19_df = pd.read_csv("datasets/FIFADATA.csv", header=0)
+team_df = pd.read_csv("datasets/teams.csv", header=0)
+team_df_url = pd.read_csv("datasets/team_urls.csv", header=0)
 
 def corr_table():
 	corr = player_df.corr()
@@ -57,7 +62,25 @@ player19_df.rename(columns={'Unnamed: 0': 'player_id19','ID' : 'int_player_id' ,
 
 json_df = player_df.to_json(orient='records')
 json_df19 = player19_df.to_json(orient='records')
+json_dfteam = team_df.to_json(orient='records')
 
-with open('json_df19.json','w') as f:
-    f.write(json_df19)
 
+# with open('json_dfteam.json','w') as f:
+#     f.write(json_dfteam)
+
+url = 'http://sofifa.com/teams?type=club'
+# https://cdn.sofifa.com/teams/467/60.png
+
+
+for i in range(1,682):
+	url_x = dict(team_df_url.loc[i-1])
+	url_loc = url_x['str_url'].split('/')[4]
+	url = 'https://cdn.sofifa.com/teams/'+url_loc+'/60.png'
+	try:
+		d = Request('https://cdn.sofifa.com/teams/'+url_loc+'/60.png', headers={'User-Agent': 'Mozilla/5.0'})
+		x = Image.open(urlopen(d)).save('ProjectFlask/static/club_images/'+str(i)+'.png','PNG')
+	except:
+		pass
+
+	
+	

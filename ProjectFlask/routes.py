@@ -3,7 +3,7 @@ from .models import db, User,login_manager
 import flask_login
 from flask_login import login_user, login_required, logout_user , current_user
 from flask import current_app as app
-from .userfunctions import player_df,player19_df
+from .userfunctions import player_df,player19_df,team_df
 from flask_sqlalchemy import SQLAlchemy
 
 @app.route('/index')
@@ -80,19 +80,33 @@ def myteam():
 def player():
 	return render_template('player.html')
 	
+@app.route('/teams',methods=['POST', 'GET'])
+@login_required
+def teams():
+	return render_template('teams.html')
+	
 
 @app.route('/player/<int:player_id>')
 def playerbyID(player_id):
 	if 'database' in session:
 		if session['database'] == 'FIFA19':
 			userdf=player19_df
-			print('kaka')
 		elif session['database'] == 'FIFA20':
 			userdf=player_df
 	else:
 		userdf=player19_df
 	return render_template('player.html',player_info=dict(userdf.loc[player_id]),player_id=str(player_id+1))
 
+@app.route('/teams/<int:team_id>')
+def teambyID(team_id):
+	if 'database' in session:
+		if session['database'] == 'FIFA19':
+			userdf=player19_df
+		elif session['database'] == 'FIFA20':
+			userdf=team_df
+	else:
+		userdf=team_df
+	return render_template('teams.html',team_info=dict(userdf.loc[team_id]),team_id=str(team_id+1))
 
 @app.route('/userpref',methods=['POST', 'GET'])
 @login_required

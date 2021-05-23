@@ -1,3 +1,4 @@
 *TODO :
-finish the search bar (manes19/df19)
-integrate the predictors into the server
+finish the search bar (manes19/df19) - done 
+insert the predictors as functions 
+url lib - download the pngs from sofifa using url lib with for (681)

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Teams{% endblock %}
+{% block content %}
+
+
+<title>Teams Search</title>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6 m-auto">
+                    <h3 class="text-center mb-3 colour">
+                        Team Search
+                    </h3>
+                    <div class="form-group">
+                        <input type="text" id='search' class="form-control form-control-lg" placeholder="Enter the team's name">
+                    </div>
+                    <div id="match-list"></div>
+                </div>
+            </div>
+        </div> 
+        <!-- {% if session['database'] == 'FIFA19' %} 
+        <script src="{{ url_for('static', filename='javascript/manes19.js') }}"></script>
+        <h3 style="position: absolute; left: 38%;">Current Database version : 2019-2020</h3>
+        {% else %} -->
+        <script src="{{ url_for('static', filename='javascript/manesTeam.js') }}"></script>
+        <!-- {% endif %} -->
+
+
+{% for key in team_info %}
+            <li class="list-group-item d-flex justify-content-between colour">
+                <strong>{{key}}</strong>
+                <p>{{team_info[key]}}</p>
+            </li>
+
+        {% endfor %}
+
+{% endblock %}
