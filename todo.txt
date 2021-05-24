@@ -1,4 +1,46 @@
 *TODO :
 finish the search bar (manes19/df19) - done 
-insert the predictors as functions 
-url lib - download the pngs from sofifa using url lib with for (681)
+insert the predictors as functions - my team 
+url lib - download the pngs from sofifa using url lib with for (681) - DONE! 
+
+todo : 
+
+* my team : 
+my team will involve a version control : 2019 version or 2020 version option 
+and will effect the prices of players and the prediction algorythems 
+
+will include current teams and their stats (only in the current 2020 version for now)
+and thus will show max money that can be spent on a players ( team budget ) , option to select a current team can be added to 
+a mini search bar or to the current search bar 
+
+so : 
+
+ TODO :
+
+*make a new team 
+-----------------
+[what version? 2020/2019 OR 2021/2020]
+[what league? for now adding just Premier league and LaLiga and might add Series A]
+[what team? new team or inventing a team]
+-----------------
+
+*current teams : 
+---------------
+current teams that a user has [maximum 2 teams]
+choose between anyone of them
+
+*adding players :
+---------------
+![depending on how much money you have,based on your league you will be able to spend money to buy players]
+[recommender systems - Recommend a player on a good buy [either profitable , fit for the team, or just a good player for a good price]]
+[could also just be picked by a user]
+[predicting a player's rating / value/ wage - already done but how do i use it ?]
+
+
+
+
+
+
+new db:
+-------
+includes user's id , new team id ? or excisting team's id 

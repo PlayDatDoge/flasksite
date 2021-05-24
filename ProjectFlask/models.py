@@ -30,3 +30,4 @@ class User(UserMixin, db.Model):
 
     def validate_password(self, password):
         return check_password_hash(self._password_hash, password)
+
