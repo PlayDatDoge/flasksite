@@ -17,13 +17,18 @@
                 </div>
             </div>
         </div> 
-        <!-- {% if session['database'] == 'FIFA19' %} 
-        <script src="{{ url_for('static', filename='javascript/manes19.js') }}"></script>
-        <h3 style="position: absolute; left: 38%;">Current Database version : 2019-2020</h3>
-        {% else %} -->
-        <script src="{{ url_for('static', filename='javascript/manesTeam.js') }}"></script>
-        <!-- {% endif %} -->
+        {% if session['database'] == 'FIFA19' %} 
+        <script class=" colour " src="{{ url_for('static', filename='javascript/manesTeam.js') }}"></script>
+        <h3 style="position: absolute; left: 38%;"></h3>
+        {% else %}
+        <script class=" colour " src="{{ url_for('static', filename='javascript/manesTeam.js') }}"></script>
+        {% endif %}
 
+{% if team_id %}
+<div class="w3-panel">
+<img src="{{ url_for('static', filename='club_images/'+ team_id +'.png') }}" style="position: relative ; left: 48%;">
+</div>
+{% endif %}
 
 {% for key in team_info %}
             <li class="list-group-item d-flex justify-content-between colour">

@@ -72,15 +72,15 @@ url = 'http://sofifa.com/teams?type=club'
 # https://cdn.sofifa.com/teams/467/60.png
 
 
-for i in range(1,682):
-	url_x = dict(team_df_url.loc[i-1])
-	url_loc = url_x['str_url'].split('/')[4]
-	url = 'https://cdn.sofifa.com/teams/'+url_loc+'/60.png'
-	try:
-		d = Request('https://cdn.sofifa.com/teams/'+url_loc+'/60.png', headers={'User-Agent': 'Mozilla/5.0'})
-		x = Image.open(urlopen(d)).save('ProjectFlask/static/club_images/'+str(i)+'.png','PNG')
-	except:
-		pass
+# for i in range(1,682):
+# 	url_x = dict(team_df_url.loc[i-1])
+# 	url_loc = url_x['str_url'].split('/')[4]
+# 	url = 'https://cdn.sofifa.com/teams/'+url_loc+'/60.png'
+# 	try:
+# 		d = Request('https://cdn.sofifa.com/teams/'+url_loc+'/60.png', headers={'User-Agent': 'Mozilla/5.0'})
+# 		x = Image.open(urlopen(d)).save('ProjectFlask/static/club_images/'+str(i)+'.png','PNG')
+# 	except:
+# 		pass
 
 	
 	
