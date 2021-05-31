@@ -17,13 +17,8 @@
                 </div>
             </div>
         </div> 
-        {% if session['database'] == 'FIFA19' %} 
         <script class=" colour " src="{{ url_for('static', filename='javascript/manesTeam.js') }}"></script>
         <h3 style="position: absolute; left: 38%;"></h3>
-        {% else %}
-        <script class=" colour " src="{{ url_for('static', filename='javascript/manesTeam.js') }}"></script>
-        {% endif %}
-
 {% if team_id %}
 <div class="w3-panel">
 <img src="{{ url_for('static', filename='club_images/'+ team_id +'.png') }}" style="position: relative ; left: 48%;">

@@ -11,7 +11,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-print('easycheck')
+
 
 with app.app_context():
   from . import routes

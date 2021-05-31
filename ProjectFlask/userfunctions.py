@@ -50,14 +50,6 @@ player_df['str_player_name'] = pd.Series(namelist)
     
 
 
-
-# def player_finder(name):
-# 	name = name.title()
-# 	if name in player_df['str_player_name'].values:
-# 		 print('Further information about the player: '+name+'down below')   
-# 	else:
-# 		 print('No such player, Try using capital letters / for example  "Ben Hough"')
-
 player19_df.rename(columns={'Unnamed: 0': 'player_id19','ID' : 'int_player_id' ,'Name' : 'str_player_name'},inplace=True)
 
 json_df = player_df.to_json(orient='records')

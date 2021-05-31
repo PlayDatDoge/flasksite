@@ -2,5 +2,36 @@
 {% block title %}My team{% endblock %}
 {% block content %}
 
+<div class="row" >
+    <div class="col-sm-6 col-md-6 col-lg-6" >
+        <div class="card mb-5">
+            {% for team in user_team_list %}
+                        <li class="list-group-item d-flex justify-content-between colour" >
+                            <strong>{{team}}</strong>  
+                            <a class="card card-body mb-1" href="/myteam/{{team.team_id}}">{{user_team_list[team]}}</a>
+                            
+                        </li>
+
+                    {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="card mb-5">
+            {% for key in myteam_info %}
+                        <li class="list-group-item d-flex justify-content-between colour">
+                            <strong>{{key}}</strong>
+                            <p>{{myteam_info[key]}}</p>
+                        </li>
+
+                    {% endfor %}
+
+        </div>
+    </div>
+</div>
 {% endblock %}
 

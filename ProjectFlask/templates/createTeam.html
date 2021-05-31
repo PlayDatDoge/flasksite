@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Create Team{% endblock %}
+{% block content %}
+
+<div class="container container-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header colour">Create New Team</div>
+                <div class="card-body">
+
+                    <form class="form-horizontal" method="post" action="#">
+
+                        <div class="form-group">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="team_name" class="cols-sm-2 colour control-label">Your Team name</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                    <input required type="team_name" class="form-control" name="team_name" id="team_name"
+                                           placeholder="Enter your team's name"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="version" class="cols-sm-2 colour control-label">Team version</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-users fa"
+                                                                       aria-hidden="true"></i></span>
+                                    <input required type="radio" class="form-control" name="version" id="version" value="FIFA19"/>
+                                        <label for="FIFA19">FIFA 19</label><br>
+                                    <input type="radio" class="form-control" name="version" id="version" value="FIFA20"/>
+                                        <label required for="FIFA20">FIFA 20</label><br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="league" class="cols-sm-2 colour control-label">Choose your league</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input required type="radio" class="form-control" name="league" id="league" value="premierleague"/>
+                                        <label for="league">Premier League</label><br>
+                                    <input required type="radio" class="form-control" name="league" id="league" value="laliga"/>
+                                        <label for="league">LaLiga</label><br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <button type="submit"  class="btn btn-info btn-bl btn-block login-button">Create Team
+                            </button>
+                        </div>
+                        <div class="login-register">
+                            <a href="/myteam" class="text-info" >I Prefer to choose an existing team</a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

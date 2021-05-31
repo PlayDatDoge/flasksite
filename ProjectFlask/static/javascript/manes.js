@@ -26,7 +26,8 @@ const outputHtml = matches => {
         const html = matches.map(match => `
         <a class="card card-body mb-1" href="/player/${match.int_player_id-1}">
         <h4>${match.str_player_name}<span class="text-primary">
-        ${match.int_player_id}</span></h4>
+        ${match.int_player_id}</span>
+        </h4>
         </a>
         ` )
         .join('');

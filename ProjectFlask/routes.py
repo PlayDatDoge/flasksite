@@ -1,5 +1,5 @@
 from flask import redirect, url_for, render_template, request,session  
-from .models import db, User,login_manager
+from .models import db, User,login_manager,Team
 import flask_login
 from flask_login import login_user, login_required, logout_user , current_user
 from flask import current_app as app
@@ -72,12 +72,44 @@ def register():
 @app.route('/myteam',methods=['POST', 'GET'])
 @login_required
 def myteam():
-	return render_template('myteam.html')
+	if current_user.user_teams != '':
+		return render_template('myteam.html',user_team_list = current_user.user_teams)
+	return render_template('createTeam.html')
 
- 
-@app.route('/player',methods=['POST', 'GET'])
+@app.route('/myteam/<int:team_id>',methods=['POST', 'GET'])
 @login_required
+def myteamID(team_id):
+	
+	for team in current_user.user_teams:
+		if team.team_id == team_id :
+			print()
+			myteam_info=(team.__dict__)
+			myteam_info.pop('_sa_instance_state') 
+			return render_template('myteam.html',myteam_info=(team.__dict__))
+			
+	return redirect(url_for('login'))
+
+@app.route('/createTeam',methods=['POST', 'GET'])
+@login_required
+def createTeam():
+	if request.method == "POST":
+		team_name = request.form['team_name']
+		team_version = request.form['version']
+		if request.form['league'] == 'premierleague':
+			team_balance = 120000000
+		if request.form['league'] == 'laliga':
+			team_balance = 110000000
+		if not Team.query.filter_by(team_name=team_name).first():
+			db.session.add(Team(team_name=team_name,team_version=team_version,team_balance=team_balance,user_id=current_user.id))
+			db.session.commit()
+			return redirect(url_for('index'))
+	return render_template('createTeam.html')
+
+@app.route('/player',methods=['POST', 'GET'])
 def player():
+	if current_user.is_authenticated:
+		if not 'database' in session:
+			session['database'] = current_user.database
 	return render_template('player.html')
 	
 @app.route('/teams',methods=['POST', 'GET'])
@@ -88,6 +120,9 @@ def teams():
 
 @app.route('/player/<int:player_id>')
 def playerbyID(player_id):
+	if current_user.is_authenticated:
+		if not 'database' in session:
+			session['database'] = current_user.database
 	if 'database' in session:
 		if session['database'] == 'FIFA19':
 			userdf=player19_df
@@ -99,14 +134,7 @@ def playerbyID(player_id):
 
 @app.route('/teams/<int:team_id>')
 def teambyID(team_id):
-	if 'database' in session:
-		if session['database'] == 'FIFA19':
-			userdf=player19_df
-		elif session['database'] == 'FIFA20':
-			userdf=team_df
-	else:
-		userdf=team_df
-	return render_template('teams.html',team_info=dict(userdf.loc[team_id]),team_id=str(team_id+1))
+	return render_template('teams.html',team_info=dict(team_df.loc[team_id]),team_id=str(team_id+1))
 
 @app.route('/userpref',methods=['POST', 'GET'])
 @login_required

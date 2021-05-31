@@ -21,7 +21,7 @@ so :
 -----------------
 [what version? 2020/2019 OR 2021/2020]
 [what league? for now adding just Premier league and LaLiga and might add Series A]
-[what team? new team or inventing a team]
+[what team?   /inventing a team]
 -----------------
 
 *current teams : 
