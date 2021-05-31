@@ -9,7 +9,7 @@ const searchPlayer = async searchText => {
     // Get matches to current input 
     let matches = players.filter(player => {
         const regex = new RegExp(`^${searchText}`,'gi');
-        return player.str_player_name.match(regex)
+        return player.str_player_name.match(regex) 
     });
     if (searchText.length === 0) {
         matches = [];

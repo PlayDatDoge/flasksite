@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Choose An existing Team{% endblock %}
+{% block content %}
+<a class= "text-info" style="position: absolute; left: 38%;">
+Important to note! An existing team is taken only from the 2020-2021 data 
+</a>
+<title>Teams Search</title>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6 m-auto">
+                    <h3 class="text-center mb-3 colour">
+                        Team Search
+                    </h3>
+                    <div class="form-group">
+                        <input type="text" id='search' class="form-control form-control-lg" placeholder="Enter the team's name">
+                    </div>
+                    <div id="match-list"></div>
+                </div>
+            </div>
+        </div> 
+        <script class=" colour " src="{{ url_for('static', filename='javascript/manesTeam.js') }}"></script>
+        <h3 style="position: absolute; left: 38%;"></h3>
+
+{% if team_id %}
+<div class="w3-panel">
+<img src="{{ url_for('static', filename='club_images/'+ team_id +'.png') }}" style="position: relative ; left: 48%;">
+</div>
+{% endif %}
+
+{% for key in team_info %}
+            <li class="list-group-item d-flex justify-content-between colour">
+                <strong>{{key}}</strong>
+                <p>{{team_info[key]}}</p>
+            </li>
+
+        {% endfor %}
+        
+{% endblock %}

@@ -158,6 +158,10 @@ def userpref():
 	return render_template('userpref.html')
 
 
+@app.route('/alreadyAteam',methods=['POST', 'GET'])
+@login_required
+def alreadyAteam():
+	return render_template('alreadyAteam.html')
 
 @login_manager.unauthorized_handler
 def unauthorized():

@@ -41,6 +41,6 @@ class Team(db.Model):
     team_id = db.Column(db.Integer, primary_key=True)
     team_balance = db.Column(db.Integer)
     team_version = db.Column(db.String(10),nullable=False)
-    team_players = db.Column(db.String(500))
+    team_players = db.Column(db.String(1000))
     team_tactics = db.Column(db.String(200),nullable=False,default='Balanced,Balanced')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
