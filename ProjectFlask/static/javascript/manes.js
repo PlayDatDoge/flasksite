@@ -1,6 +1,7 @@
-
 const search = document.getElementById('search');
 const matchList = document.getElementById('match-list');
+
+
 
 // searches in df and filters 
 const searchPlayer = async searchText => {
@@ -24,7 +25,7 @@ const outputHtml = matches => {
     if(matches.length > 0 )
     {
         const html = matches.map(match => `
-        <a class="card card-body mb-1" href="/player/${match.int_player_id-1}">
+        <a class="card card-body mb-1" href="/${searchtype}/${match.int_player_id-1}">
         <h4>${match.str_player_name}<span class="text-primary">
         ${match.int_player_id}</span>
         </h4>

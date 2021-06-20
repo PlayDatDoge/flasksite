@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Linear Regression{% endblock %}
+{% block content %}
+<title>Player Search</title>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <h3 class="text-center mb-3 colour">
+                Player Search
+            </h3>
+            <div class="form-group">
+                <input type="text" id='search' class="form-control form-control-lg" placeholder="Enter a player's name or ID">
+            </div>
+            <div id="match-list"></div>
+        </div>
+    </div>
+</div> 
+<script> 
+const searchtype = "linearreg";
+         
+</script>
+{% if session['database'] == 'FIFA19' %} 
+<script src="{{ url_for('static', filename='javascript/manes19.js') }}"></script>
+<h3 class=" colour "style="position: relative; left: 40%;">Current Database version : 2019-2020</h3>
+{% else %}
+<script src="{{ url_for('static', filename='javascript/manes.js') }}"></script>
+<h3 class=" colour " style="position: relative; left: 40%;">Current Database version : 2020-2021</h3>
+<a class="text-center colour" style="position: relative;left: 30%;">{{player_name}}{{value}}</a>
+
+
+{% endif %}
+{% endblock %}

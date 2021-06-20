@@ -36,6 +36,27 @@ player19_df = pd.read_csv("datasets/FIFADATA.csv", header=0)
 team_df = pd.read_csv("datasets/teams.csv", header=0)
 team_df_url = pd.read_csv("datasets/team_urls.csv", header=0)
 
+# def currencyConverter(val):
+#     if val[-1] == 'M':
+#         val = val[1:-1]
+#         val = float(val) * 1000000
+#         return val
+        
+#     elif val[-1] == 'K':
+#         val = val[1:-1]
+#         val = float(val) * 1000
+#         return val
+    
+#     else:
+#         return 0
+
+# player19_df['Value in Pounds'] = player19_df['Value'].apply(currencyConverter)
+# player19_df['Wage in Pounds'] = player19_df['Wage'].apply(currencyConverter)
+
+
+
+player19_df.head()
+
 def corr_table():
 	corr = player_df.corr()
 	mask = np.zeros_like(corr)
@@ -49,7 +70,6 @@ namelist = [val.split('/')[-3].replace('-',' ').title() for val in url_df]
 player_df['str_player_name'] = pd.Series(namelist)
     
 
-
 player19_df.rename(columns={'Unnamed: 0': 'player_id19','ID' : 'int_player_id' ,'Name' : 'str_player_name'},inplace=True)
 
 json_df = player_df.to_json(orient='records')
@@ -60,7 +80,7 @@ json_dfteam = team_df.to_json(orient='records')
 # with open('json_dfteam.json','w') as f:
 #     f.write(json_dfteam)
 
-url = 'http://sofifa.com/teams?type=club'
+# url = 'http://sofifa.com/teams?type=club'
 # https://cdn.sofifa.com/teams/467/60.png
 
 

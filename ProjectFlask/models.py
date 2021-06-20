@@ -41,6 +41,10 @@ class Team(db.Model):
     team_id = db.Column(db.Integer, primary_key=True)
     team_balance = db.Column(db.Integer)
     team_version = db.Column(db.String(10),nullable=False)
-    team_players = db.Column(db.String(1000))
-    team_tactics = db.Column(db.String(200),nullable=False,default='Balanced,Balanced')
+    team_players = db.Column(db.String(3000),default='')
+    team_offensive_style = db.Column(db.String(200),nullable=False,default='Balanced')
+    team_defensive_style = db.Column(db.String(200),nullable=False,default='Balanced')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    df_team_id = db.Column(db.Integer)
+    def __repr__(self):
+        return f'\nTeam name: {self.team_name}\n'

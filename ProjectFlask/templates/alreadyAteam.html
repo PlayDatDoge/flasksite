@@ -1,38 +1,62 @@
 {% extends "base.html" %}
 {% block title %}Choose An existing Team{% endblock %}
 {% block content %}
-<a class= "text-info" style="position: absolute; left: 38%;">
+<a class= "text-info" style="position: relative; left: 40%;">
 Important to note! An existing team is taken only from the 2020-2021 data 
 </a>
-<title>Teams Search</title>
+ <!-- <title>Submit the team's name</title>
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6 m-auto">
                     <h3 class="text-center mb-3 colour">
-                        Team Search
+                        Submit the team's name
                     </h3>
                     <div class="form-group">
-                        <input type="text" id='search' class="form-control form-control-lg" placeholder="Enter the team's name">
+                        <input required type="text" id='submit' class="form-control form-control-lg" placeholder="Enter the team's name">
                     </div>
-                    <div id="match-list"></div>
                 </div>
             </div>
-        </div> 
-        <script class=" colour " src="{{ url_for('static', filename='javascript/manesTeam.js') }}"></script>
-        <h3 style="position: absolute; left: 38%;"></h3>
+        </div>   -->
 
+        <!-- <script class=" colour " src="{{ url_for('static', filename='javascript/manesTeam.js') }}"></script>
+        <h3 style="position: absolute; left: 38%;"></h3> --> 
+<!-- 
 {% if team_id %}
 <div class="w3-panel">
 <img src="{{ url_for('static', filename='club_images/'+ team_id +'.png') }}" style="position: relative ; left: 48%;">
 </div>
-{% endif %}
+{% endif %} -->
 
-{% for key in team_info %}
+<!-- {% for key in team_info %}
             <li class="list-group-item d-flex justify-content-between colour">
                 <strong>{{key}}</strong>
                 <p>{{team_info[key]}}</p>
             </li>
 
-        {% endfor %}
-        
-{% endblock %}
+        {% endfor %} -->
+         
+        <div id="submitTeam">
+            <h3 class="text-center text-white pt-5"></h3>
+            <div class="container">
+                <div id="team-row" class="row justify-content-center align-items-center">
+                    <div id="team-column" class="col-md-6">
+                        <div id="team-box" class="col-md-12">
+                            <form id="team-form" class="form" action="" method="POST">
+                                <h3 class="text-center text-info"></h3>
+                                <div class="form-group">
+                                    <label for="name" class="text-info">Team's name:</label><br>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter the team's name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                </div>
+                                <div id="team-link" class="text-right">
+                                    <a href="/createTeam" class="text-info">Create a team!</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %} 

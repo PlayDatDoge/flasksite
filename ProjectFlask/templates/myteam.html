@@ -2,36 +2,53 @@
 {% block title %}My team{% endblock %}
 {% block content %}
 
-<div class="row" >
-    <div class="col-sm-6 col-md-6 col-lg-6" >
-        <div class="card mb-5">
-            {% for team in user_team_list %}
-                        <li class="list-group-item d-flex justify-content-between colour" >
-                            <strong>{{team}}</strong>  
-                            <a class="card card-body mb-1" href="/myteam/{{team.team_id}}">{{user_team_list[team]}}</a>
-                            
-                        </li>
-
-                    {% endfor %}
-
-        </div>
-    </div>
-</div>
-
-
 <div class="row">
-    <div class="col-sm-6 col-md-6 col-lg-6">
+    <div class="col-sm-6 col-md-6 col-lg-6" style="position: relative; left: 24%;">
         <div class="card mb-5">
             {% for key in myteam_info %}
+                {% if not (key == 'team_players' or key=='_sa_instance_state') %}
                         <li class="list-group-item d-flex justify-content-between colour">
                             <strong>{{key}}</strong>
                             <p>{{myteam_info[key]}}</p>
                         </li>
-
+                        {% endif %}
                     {% endfor %}
-
         </div>
     </div>
 </div>
+
+{% if myteam_info %}
+<button
+ id="register-link" class="text-right" style="position: relative; left: 80%;">
+    <a href="/buyplayer/{{myteam_info.team_id}}" class="text-info">Sign a new Player!</a></button>
+
+<button
+ id="register-link" class="text-right" style="position: relative; left: 80%;">
+    <a href="/sitetools" class="text-info">SITE TOOLS!</a></button>
+
+
+{% endif %}
+
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6" style="position: relative; left: 24%;">
+        <div class="card mb-5">
+            <form action="" method="post">
+            {% for key in team_players %}
+                        <li class="list-group-item d-flex justify-content-between colour">
+                            <strong>{{key+ ' - ' + team_players[key]|string}}</strong>
+                        </li>
+                        <p>
+                            <label style="cursor: pointer;">
+                              <input class='text-center'style='display: none;' type="radio" name="player_id" id="player_id" value='{{team_players[key]}}' onchange="this.form.submit();"/> 
+                                                                Sell player | X | 
+                            </label>
+                        </p>
+                    {% endfor %}
+            </form>
+        </div>
+    </div>
+</div>
+ 
+
 {% endblock %}
 

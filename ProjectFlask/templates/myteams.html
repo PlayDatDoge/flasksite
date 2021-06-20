@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}My Teams{% endblock %}
+{% block content %}
+
+<div class="row" >
+    <header ></header>
+    <div class="col-sm-6 col-md-6 col-lg-6" >
+        <div class="card mb-5">
+            {% for team in user_team_list %}
+                        <li class="list-group-item d-flex justify-content-between colour" >
+                            <strong>{{team}}</strong>  
+                            <a class="card card-body mb-1" href="/myteam/{{team.team_id}}">{{user_team_list[team]}}</a>
+                            
+                        </li>
+                    {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
